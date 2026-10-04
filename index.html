@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LUMA — Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="scriipt.js"></script>
+<body>
+
+    <header class="navbar">
+        <div class="logo">LUMA.</div>
+
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Transactions</a>
+            <a href="#">Analytics</a>
+        </nav>
+
+        <button class="profile-btn">M</button>
+    </header>
+
+
+    <main class="container">
+
+        <section class="hero">
+            <div>
+                <p class="eyebrow">PERSONAL FINANCE</p>
+
+                <h1>
+                    Take control of<br>
+                    your <span>money.</span>
+                </h1>
+
+                <p class="hero-text">
+                    Track your spending, manage your income,
+                    and understand your finances with ease.
+                </p>
+            </div>
+
+            <div class="date-box">
+                <p>Today</p>
+                <strong id="currentDate">October 4, 2026</strong>
+            </div>
+        </section>
+
+
+        <section class="summary">
+
+            <div class="summary-card balance-card">
+                <p>Total Balance</p>
+                <h2 id="balance">Rs. 0</h2>
+                <span>Available balance</span>
+            </div>
+
+            <div class="summary-card">
+                <p>Total Income</p>
+                <h2 id="income">Rs. 0</h2>
+                <span>This month</span>
+            </div>
+
+            <div class="summary-card">
+                <p>Total Expenses</p>
+                <h2 id="expenses">Rs. 0</h2>
+                <span>This month</span>
+            </div>
+
+        </section>
+
+
+        <section class="dashboard-grid">
+
+            <div class="card transaction-card">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">MONEY MOVEMENT</p>
+                        <h2>Recent Transactions</h2>
+                    </div>
+
+                    <button class="add-btn" id="openForm">
+                        + Add Transaction
+                    </button>
+                </div>
+
+                <div id="transactionList" class="transaction-list">
+
+                    <div class="empty-state">
+                        <div class="empty-icon">＋</div>
+                        <h3>No transactions yet</h3>
+                        <p>Add your first income or expense.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <aside class="card quick-card">
+
+                <p class="eyebrow">QUICK ADD</p>
+
+                <h2>Add transaction</h2>
+
+                <p class="quick-text">
+                    Keep your finances updated by adding
+                    your latest income or spending.
+                </p>
+
+                <button class="yellow-btn" id="quickAdd">
+                    Add Transaction →
+                </button>
+
+            </aside>
+
+        </section>
+
+        <!-- TRANSACTION MODAL -->
+
+<!-- TRANSACTION MODAL -->
+
+<div class="modal" id="transactionModal">
+
+    <div class="modal-content">
+
+        <div class="modal-top">
+
+            <div>
+                <span class="form-label-small">NEW TRANSACTION</span>
+                <h2>Where did your money go?</h2>
+                <p>Add the details below to keep your finances organized.</p>
+            </div>
+
+            <button class="close-btn" id="closeForm">
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="transactionForm">
+
+            <!-- TYPE -->
+
+            <div class="form-section">
+
+                <label class="main-label">
+                    Transaction type
+                </label>
+
+                <div class="type-buttons">
+
+                    <button
+                        type="button"
+                        class="type-btn active"
+                        data-type="expense"
+                    >
+                        <span class="type-icon">−</span>
+
+                        <span>
+                            <strong>Expense</strong>
+                            <small>Money spent</small>
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="type-btn"
+                        data-type="income"
+                    >
+                        <span class="type-icon">+</span>
+
+                        <span>
+                            <strong>Income</strong>
+                            <small>Money received</small>
+                        </span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- AMOUNT -->
+
+            <div class="form-section">
+
+                <label class="main-label">
+                    Amount
+                </label>
+
+                <div class="amount-input">
+
+                    <span>Rs.</span>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="0"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-section">
+
+                <label
+                    class="main-label"
+                    for="title"
+                >
+                    What was it for?
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    class="large-input"
+                    placeholder="e.g. Grocery shopping"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CATEGORY + DATE -->
+
+            <div class="two-fields">
+
+                <div class="form-section">
+
+                    <label
+                        class="main-label"
+                        for="category"
+                    >
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        class="large-input"
+                        required
+                    >
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Food">
+                            🍴 Food
+                        </option>
+
+                        <option value="Shopping">
+                            🛍️ Shopping
+                        </option>
+
+                        <option value="Bills">
+                            🧾 Bills
+                        </option>
+
+                        <option value="Transport">
+                            🚗 Transport
+                        </option>
+
+                        <option value="Education">
+                            📚 Education
+                        </option>
+
+                        <option value="Entertainment">
+                            🎬 Entertainment
+                        </option>
+
+                        <option value="Other">
+                            ✦ Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <label
+                        class="main-label"
+                        for="date"
+                    >
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        class="large-input"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <button
+                type="submit"
+                class="save-btn"
+            >
+                Save Transaction
+                <span>→</span>
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
